@@ -1,5 +1,5 @@
 {
-  "name": "avatar4eg/flarum-ext-users-list",
+  "name": "issyrocks12/flarum-ext-users-list",
   "description": "Add users list in admin panel.",
   "type": "flarum-extension",
   "keywords": ["users", "admin"],
