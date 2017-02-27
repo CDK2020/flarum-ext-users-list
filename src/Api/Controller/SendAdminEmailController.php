@@ -1,5 +1,5 @@
 <?php
-namespace Avatar4eg\UsersList\Api\Controller;
+namespace issyrocks12\UsersList\Api\Controller;
 
 use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Core\Repository\UserRepository;
@@ -79,7 +79,7 @@ class SendAdminEmailController implements ControllerInterface
     {
         $this->mailer->send(['raw' => $text], [], function (Message $message) use ($email, $subject) {
             $message->to($email);
-            $message->subject('[' . $this->settings->get('forum_title') . '] ' . ($subject !== '' ? $subject : $this->translator->trans('avatar4eg-users-list.email.default_subject')));
+            $message->subject('[' . $this->settings->get('forum_title') . '] ' . ($subject !== '' ? $subject : $this->translator->trans('issyrocks12-users-list.email.default_subject')));
         });
     }
 }

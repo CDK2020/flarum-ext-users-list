@@ -1,5 +1,5 @@
 <?php
-namespace Avatar4eg\UsersList\Listener;
+namespace issyrocks12\UsersList\Listener;
 
 use DirectoryIterator;
 use Flarum\Event\ConfigureWebApp;
@@ -21,7 +21,7 @@ class AddClientAssets
                 __DIR__ . '/../../js/admin/dist/extension.js',
                 __DIR__ . '/../../less/admin/extension.less'
             ]);
-            $event->addBootstrapper('avatar4eg/users-list/main');
+            $event->addBootstrapper('issyrocks12/users-list/main');
         }
     }
 

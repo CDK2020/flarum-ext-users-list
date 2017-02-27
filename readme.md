@@ -1,4 +1,4 @@
-# Users-list by Avatar4eg
+# Users-list by issyrocks12
 
 A [Flarum](http://flarum.org) extension that adds users list to admin panel.
 
@@ -17,7 +17,7 @@ Mail modal:
 ### Installation
 
 ```bash
-composer require avatar4eg/flarum-ext-users-list
+composer require issyrocks12/flarum-ext-users-list
 ```
 
 ### Configuration
@@ -34,6 +34,6 @@ On admin panel click Users button to view users. For each user there are buttons
 
 ### Links
 
-- [on github](https://github.com/avatar4eg/flarum-ext-users-list)
-- [on packagist](https://packagist.com/packages/avatar4eg/flarum-ext-users-list)
-- [issues](https://github.com/avatar4eg/flarum-ext-users-list/issues)
+- [on github](https://github.com/issyrocks12/flarum-ext-users-list)
+- [on packagist](https://packagist.com/packages/issyrocks12/flarum-ext-users-list)
+- [issues](https://github.com/issyrocks12/flarum-ext-users-list/issues)

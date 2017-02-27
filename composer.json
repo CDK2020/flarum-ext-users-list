@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Avatar4eg\\UsersList\\": "src/"
+      "issyrocks12\\UsersList\\": "src/"
     }
   },
   "extra": {
