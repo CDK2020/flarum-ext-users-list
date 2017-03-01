@@ -58,26 +58,29 @@ class SendAdminEmailController implements ControllerInterface
         $actor = $request->getAttribute('actor');
 
         if ($actor !== null && $actor->isAdmin()) {
-            $data = array_get($request->getParsedBody(), 'data', []);
-
+            $data = array_get($request->getParsedBody(), 'data', []); 
             if (isset($data['forAll']) && !empty($data['forAll'])) {
                 $users = $this->users->query()->whereVisibleTo($actor)->get();
                 foreach ($users as $user) {
-                    $this->sendMail($user->email, $data['subject'], $data['text']);
-                }
+                    $this->sendMail($user->email, $data['subject'], $data['text'], $user->username);
+		}
             } else {
                 foreach ($data['emails'] as $email) {
-                    $this->sendMail($email, $data['subject'], $data['text']);
-                }
+                    $this->sendMail($email, $data['subject'], $data['text'], $data['username']);                }
             }
         }
 
         return new EmptyResponse;
     }
 
-    protected function sendMail($email, $subject, $text)
+    protected function sendMail($email, $subject, $text, $user)
     {
-        $this->mailer->send(['raw' => $text], [], function (Message $message) use ($email, $subject) {
+			$varText = str_replace("!!user!!", $user, $text);
+			$vars = array(
+   			'name'  => $user,
+   			'text'   => $varText
+			);
+        $this->mailer->send('issyrocks12-userlist::default', $vars, function (Message $message) use ($email, $subject) {
             $message->to($email);
             $message->subject('[' . $this->settings->get('forum_title') . '] ' . ($subject !== '' ? $subject : $this->translator->trans('issyrocks12-users-list.email.default_subject')));
         });
