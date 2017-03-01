@@ -1,6 +1,6 @@
 # Users-list by Avatar4eg updated by issyrocks12
 
-A [Flarum](http://flarum.org) extension that adds users list to admin panel.
+A [Flarum](http://flarum.org) extension that adds users list to admin panel. Emails have full html support
 
 ### Screenshots
 
@@ -13,6 +13,10 @@ Mail modal:
 
 - Allow admin to view list of users registered users.
 - Allow admin to send emails to user or all users.
+
+### variables
+
+- Typing "!!user!!" into the message box will replace it with the user it is being sent to, works will mail to all.
 
 ### Installation
 
