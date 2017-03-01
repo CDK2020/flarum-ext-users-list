@@ -119,7 +119,8 @@ export default class EmailUserModal extends Modal {
             emails: this.forAll ? [] : this.splitEmails(this.email()),
             subject: this.subject(),
             text: this.messageText(),
-            forAll: this.forAll
+            forAll: this.forAll,
+            username: this.user.username()
         };
 
         app.request({
