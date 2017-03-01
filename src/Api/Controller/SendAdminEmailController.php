@@ -75,12 +75,8 @@ class SendAdminEmailController implements ControllerInterface
 
     protected function sendMail($email, $subject, $text, $user)
     {
-			$varText = str_replace("!!user!!", $user, $text);
-			$vars = array(
-   			'name'  => $user,
-   			'text'   => $varText
-			);
-        $this->mailer->send('issyrocks12-userlist::default', $vars, function (Message $message) use ($email, $subject) {
+	$varText = str_replace("!!user!!", $user, $text);
+        $this->mailer->send('issyrocks12-userlist::default', ['text' => $varText], function (Message $message) use ($email, $subject) {
             $message->to($email);
             $message->subject('[' . $this->settings->get('forum_title') . '] ' . ($subject !== '' ? $subject : $this->translator->trans('issyrocks12-users-list.email.default_subject')));
         });
