@@ -162,7 +162,8 @@ System.register('issyrocks12/users-list/components/EmailUserModal', ['flarum/app
                             emails: this.forAll ? [] : this.splitEmails(this.email()),
                             subject: this.subject(),
                             text: this.messageText(),
-                            forAll: this.forAll
+                            forAll: this.forAll,
+			    username: this.user.username()
                         };
 
                         app.request({
