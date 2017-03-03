@@ -59,26 +59,35 @@ class SendAdminEmailController implements ControllerInterface
 
         if ($actor !== null && $actor->isAdmin()) {
             $data = array_get($request->getParsedBody(), 'data', []); 
+	    $this->replaceStrings($subject
             if (isset($data['forAll']) && !empty($data['forAll'])) {
                 $users = $this->users->query()->whereVisibleTo($actor)->get();
                 foreach ($users as $user) {
-                    $this->sendMail($user->email, $data['subject'], $data['text'], $user->username);
+                    $this->sendMail($user->email, $this->replaceStrings($data['subject'], $user->username), $this->replaceStrings($data['text'], $user->username));
 		}
             } else {
                 foreach ($data['emails'] as $email) {
-                    $this->sendMail($email, $data['subject'], $data['text'], $data['username']);                }
+                    $this->sendMail($email, $this->replaceStrings($data['subject'], $data['username']), $this->replaceStrings($data['text'], $data['username']));                }
             }
         }
 
         return new EmptyResponse;
     }
 
-    protected function sendMail($email, $subject, $text, $user)
+    protected function replaceStrings($input, $user)
     {
-	$varText = str_replace("!!user!!", $user, $text);
-        $this->mailer->send('issyrocks12-userlist::default', ['text' => $varText], function (Message $message) use ($email, $subject) {
+	$varText = str_replace(array("\r\n", "\n\r", "\r", "\n"), "<br>", $input);
+	$varText = str_replace("!!user!!", $user, $varText); 
+	$varText = str_replace("!!forum_name!!", $this->settings->get('forum_title'), $varText);
+	return $varText;
+    }
+
+    protected function sendMail($email, $subject, $text)
+    {
+        $this->mailer->send('issyrocks12-userlist::default', ['text' => $text], function (Message $message) use ($email, $subject) {
             $message->to($email);
-            $message->subject('[' . $this->settings->get('forum_title') . '] ' . ($subject !== '' ? $subject : $this->translator->trans('issyrocks12-users-list.email.default_subject')));
+            $message->subject(($subject !== '' ? $subject : $this->translator->trans('issyrocks12-users-list.email.default_subject')));
         });
     }
 }
+{
